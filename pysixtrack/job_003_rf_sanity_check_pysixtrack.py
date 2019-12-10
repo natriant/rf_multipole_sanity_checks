@@ -41,7 +41,7 @@ clight = 299792458 # speed of light [m/s]
 k = 2 * np.pi * f_cc1 / clight # wavenumber of the cavity
 
 # estimate the expected closed orbit distortion from the standard CC
-n_particles = 1000.
+n_particles = pp.n_macroparticles
 start, stop = -0.6, 0.6
 step = (stop-start)/n_particles
 initial_sigmas = np.arange(start, stop, step)
@@ -57,7 +57,7 @@ df_1 =  pd.read_pickle(pp.output_dir+'/tbt.pkl')
 
 # plot
 plt.scatter(initial_sigmas, y_co_CC, label = 'theoretical prediction', linewidth = 6)
-plt.scatter(df_1['sigma'][499], df_1['y'][499], label ='simulation results', linewidth=0.5)
+plt.scatter(df_1['sigma'][pp.n_turns_max - 1], df_1['y'][pp.n_turns_max - 1], label ='simulation results', linewidth=0.5)
 plt.xlabel('sigma [m]')
 plt.ylabel(r'$y_{co}(s)$ [m] ')
 plt.grid()
