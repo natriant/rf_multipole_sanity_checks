@@ -40,9 +40,7 @@ Qy = pp.Qy
 mass = Particles.pmass
 E_rest = mass
 P0C = pp.p0c
-print(P0C)
 E_0 = np.sqrt(P0C**2+E_rest**2)
-print(E_0)
 clight = 299792458 # speed of light [m/s]
 
 k = 2 * np.pi * f_cc1 / clight # wavenumber of the cavity
