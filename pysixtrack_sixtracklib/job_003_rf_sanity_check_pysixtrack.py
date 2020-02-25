@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 
 import simulation_parameters as pp
 
+from pysixtrack.particles import Particles
+
 # plotting parameters
 params = {'legend.fontsize': 25,
           'figure.figsize': (12.5, 10.5),
@@ -31,11 +33,16 @@ muy = twiss_for_CO['muy_cc1']
 # parameters of the CC kick
 V_cc1 = pp.cravity1_voltage
 f_cc1 = 400e6 #Hz
-ps_cc1 = pp.cravity1_ps 
+ps_cc1 = pp.cravity1_phase 
 
 # general parameters
 Qy = pp.Qy
-E_0 = 26e9 # if you want the exact number use madx
+mass = Particles.pmass
+E_rest = mass
+P0C = pp.p0c
+print(P0C)
+E_0 = np.sqrt(P0C**2+E_rest**2)
+print(E_0)
 clight = 299792458 # speed of light [m/s]
 
 k = 2 * np.pi * f_cc1 / clight # wavenumber of the cavity
@@ -57,7 +64,7 @@ df_1 =  pd.read_pickle(pp.output_dir+'/tbt.pkl')
 
 # plot
 plt.scatter(initial_sigmas, y_co_CC, label = 'theoretical prediction', linewidth = 6)
-plt.scatter(df_1['sigma'][pp.n_turns_max - 1], df_1['y'][pp.n_turns_max - 1], label ='simulation results', linewidth=0.5)
+plt.scatter(df_1['sigma'][pp.n_turns_max - 1], df_1['y'][pp.n_turns_max - 1], label ='sixtracklib', linewidth=0.5)
 plt.xlabel('sigma [m]')
 plt.ylabel(r'$y_{co}(s)$ [m] ')
 plt.grid()
