@@ -52,7 +52,8 @@ step = (stop-start)/n_particles
 initial_sigmas = np.arange(start, stop, step)
 
 # vertical kick from the standard CC
-delta_py_CC1 = V_cc1 * np.sin(ps_cc1 -90. + k * np.array(initial_sigmas))/E_0
+def2rad=np.pi/180.
+delta_py_CC1 = V_cc1 * np.sin((ps_cc1 -90.)*deg2rad + k * np.array(initial_sigmas))/E_0
 # closed orbit at the start of the lattice
 y_co_CC = (np.sqrt(beta_y*beta_y_CC1)) * np.array(delta_py_CC1)*np.cos(2*np.pi*muy - np.pi*Qy)/ (2*np.sin(np.pi*Qy)) 
 
